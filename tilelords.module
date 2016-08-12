@@ -11,7 +11,53 @@ define('UNWANTED_TAGS', 'span/h1/h2/h3/h4/div/strong');
  * when a village is created, give it a capital
 */
 
+/**
+ * Implements hook_entity_info_alter().
+   add the display modes for the villages
+ */
+function tilelords_entity_info_alter(&$entity_info) {
+  // when looking at your own village
+  $entity_info['node']['view_modes']['village_home'] = array(
+    'label' => t('Home'),
+    'custom settings' => TRUE,
+  );
+  // when looking at another user's village
+  $entity_info['node']['view_modes']['village_raid'] = array(
+    'label' => t('Raid'),
+    'custom settings' => TRUE,
+  );
 
+}
+
+/*
+ Implements hook_preprocess_node()
+ set the template overrides for the view modes
+*/
+function tilelords_preprocess_node( &$variables ){
+  if( $variables['view_mode'] == 'village_home' ){
+    // looking at own village, have controls
+    $variables['theme_hook_suggestions'][] = 'node_village_home';
+  }
+  if( $variables['view_mode'] == 'village_raid' ){
+    // looking at another's village, have attack options
+    $variables['theme_hook_suggestions'][] = 'node_village_raid';
+  }
+}
+
+/*
+  Implements hook_field_display_TYPE_alter()
+  gets called for every field of the given content type
+  do the decompression of data and display processing for the render
+*/
+function tilelords_field_display_village_alter( &$display, $context ){
+  if( $context['view_mode'] == 'village_home' ){
+    // check the field being processed
+    // maybe load units
+    // maybe find the tiles that reference this village
+    // maybe unpack the resource stockpile display
+  }
+  // display is passed by reference, no return needed
+}
 
 /* 
  Helper functions below here

@@ -6,4 +6,9 @@ core = "7.x"
 dependencies[] = entity_reference
 dependencies[] = rules
 
+files[] = battle.js
+files[] = images/emblem.png
+files[] = templates/node_village_home.tpl.php
+files[] = templates/node_village_raid.tpl.php
+
 project = "tilelords"
