@@ -3,7 +3,7 @@ description = The hooks and customizations to make this game work
 package = Custom Weeks
 version = "7.x-0.5"
 core = "7.x"
-dependencies[] = entity_reference
+dependencies[] = entityreference
 dependencies[] = rules
 
 files[] = battle.js
